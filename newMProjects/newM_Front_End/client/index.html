@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Clientes</title>
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/bootstrap-theme.css">
+    <script src="js/app/polyfill/es6.js"></script>    
+    <script type="text/javascript" src="js/jquery-1.2.6.pack.js"></script>
+    <script type="text/javascript" src="js/jquery.maskedinput-1.1.4.pack.js"></script>      
+</head>
+<body class="container">
+    <h1 class="text-left">Meus Clientes</h1>
+    <hr></hr>
+    <div id="mensagemView"></div>
+    <div class="form-row">          
+        <div class="form-group col-md-11" style="padding-left: 0px;">      
+            <label for="filtro">Nome / E-Mail</label>  
+            <input type="text" id="filtro" class="form-control" autofocus maxlength="100"/>                    
+        </div>  
+        <button onclick="clienteController.buscarClientes()" class="btn btn-primary" style="margin-top: 2%" type="button">Pesquisar</button>
+    </div>  
+    <div id="clientesView"></div>
+    <div id="mensagemView"></div>    
+    <h1 class="text-left">Adicionar / Alterar Clientes</h1>   
+    <hr></hr>     
+    <form class="form" onsubmit="clienteController.validaCampo(event)">   
+        <div class="form-row">     
+            <div class="form-group">
+                <label for="nome">Nome</label>
+                <input onkeypress="return alpha(event)" type="text" id="nome" class="form-control" required autofocus maxlength="100"/>                    
+            </div>             
+        </div>                
+        <div class="form-row">     
+            <div class="form-group col-md-2" style="padding-left: 0px;">
+                <label for="nascimento">Data de Nascimento</label>
+                <input type="text" placeholder="dd/mm/aaaa" id="nascimento" class="form-control" required maxlength="10"/>        
+            </div>            
+            <div class="form-group col-md-2" style="padding-left: 0px;">
+                <label for="cpf">CPF</label>
+                <input type="text" onBlur="ValidarCPF(form.cpf);" placeholder="999.999.999-99" id="cpf" name="cpf" class="form-control" required maxlength="14"/>        
+            </div>    
+            <div class="form-group col-md-2" style="padding-left: 0px;">
+                <label for="celular">Celular</label>
+                <input type="tel" placeholder="(99) 99999-9999" id="celular" class="form-control" required maxlength="15"/>        
+            </div>  
+            <div class="form-group col-md-6" style="padding-left: 0px; padding-right: 0px">
+                <label for="email">E-mail</label>
+                <input type="email" id="email" class="form-control" required maxlength="50"/>
+            </div> 
+        </div>                         
+        <div class="form-group">
+            <label for="endereco">Endereço</label>
+            <input id="endereco" type="text" class="form-control" required maxlength="250"/>
+        </div>        
+        <div class="form-group">
+            <label for="observacao">Observação</label>           
+            <textarea id="observacao" type="text" class="form-control" maxlength="300" rows="3"></textarea>                           
+        </div>
+        <button class="btn btn-primary" type="submit">Incluir</button>
+        <button class="btn btn-primary" type="submit">Salvar</button>
+        <button onclick="clienteController.apagarCliente()" class="btn btn-primary" type="button">Remover</button>
+    </form>        
+    <br>
+    <br>        
+    
+    <script src="js/index.js"></script>
+    <script src="js/app/models/Cliente.js"></script>
+    <script src="js/app/controllers/ClienteController.js"></script>
+    <script src="js/app/helpers/DateHelper.js"></script>
+    <script src="js/app/models/ListaClientes.js"></script>
+    <script src="js/app/views/View.js"></script>
+    <script src="js/app/views/ClientesView.js"></script>
+    <script src="js/app/models/Mensagem.js"></script>
+    <script src="js/app/views/MensagemView.js"></script>
+    <script src="js/app/services/ProxyFactory.js"></script>
+    <script src="js/app/helpers/Bind.js"></script>
+    <script src="js/app/services/ClienteService.js"></script>
+    <script src="js/app/services/HttpService.js"></script>
+    <script>
+        var clienteController = new ClienteController();
+    </script>    
+</body>
+</html>
